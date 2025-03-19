@@ -1,0 +1,24 @@
+{
+  "name": "web_dev_term-2_project",
+  "version": "1.0.0",
+  "description": "- we will be using Typescript to make our project",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsx app.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yagayyavig/Web_Dev_Term-2_Project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yagayyavig/Web_Dev_Term-2_Project/issues"
+  },
+  "homepage": "https://github.com/yagayyavig/Web_Dev_Term-2_Project#readme",
+  "dependencies": {
+    "tsx": "^4.19.3"
+  }
+}
