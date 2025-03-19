@@ -1,24 +1,28 @@
 {
-  "name": "web_dev_term-2_project",
+  "name": "bcittermproject",
   "version": "1.0.0",
-  "description": "- we will be using Typescript to make our project",
-  "main": "index.js",
+  "description": "bcit-term-project",
+  "main": "app.js",
   "scripts": {
-    "start": "tsx app.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsx watch --env-file .env app.ts",
+    "db": "ignore-for-now",
+    "studio": "ignore-for-now"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/yagayyavig/Web_Dev_Term-2_Project.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/yagayyavig/Web_Dev_Term-2_Project/issues"
-  },
-  "homepage": "https://github.com/yagayyavig/Web_Dev_Term-2_Project#readme",
+  "license": "MIT",
   "dependencies": {
-    "tsx": "^4.19.3"
+    "ejs": "^3.1.8",
+    "express": "^5.0.1",
+    "express-session": "^1.17.3",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/express-session": "^1.17.9",
+    "@types/node": "^22.13.10",
+    "@types/passport": "^1.0.14",
+    "@types/passport-local": "^1.0.37",
+    "tsx": "^4.19.3",
+    "typescript": "^5.0.2"
   }
 }

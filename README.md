@@ -1,9 +1,7 @@
-# Web-Dev Term-2 Project 
+March 15th, 2025
+Amy Chan:
+I worked on the following tasks:
 
-- we will be using Typescript to make our project 
-
-
-#### Team Members:
-- Yagayya Vig
-- Martin Petkov
-- Shrey Dhand
+1. <Insert Some Task Here> - This task is responsible for xyz functionality.
+2. <Insert Some Task Here> - This task is responsible for xyz functionality.
+3. <Insert Some Task Here> - This task is responsible for xyz functionality.
