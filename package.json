@@ -4,7 +4,7 @@
   "description": "bcit-term-project",
   "main": "app.js",
   "scripts": {
-    "start": "tsx watch --env-file .env app.ts",
+    "start": "tsx watch --env-file=.env app.ts",
     "db": "ignore-for-now",
     "studio": "ignore-for-now"
   },
