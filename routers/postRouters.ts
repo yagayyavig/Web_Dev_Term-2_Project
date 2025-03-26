@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/create", ensureAuthenticated, (req, res) => {
-  res.render("createPosts");
+  res.render("createPosts", {user: req.user});
 });
 
 // Yagayya 
@@ -26,7 +26,7 @@ router.post("/create", ensureAuthenticated, async (req, res) => {
       });
     }
 
-    addPost(title, link, creator, description, subgroup);
+    addPost(title, link, creator , description, subgroup);
     res.redirect("/posts");
   } catch (err) {
     console.error("There is an error", err);
