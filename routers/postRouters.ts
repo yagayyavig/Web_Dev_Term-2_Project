@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 import { ensureAuthenticated } from "../middleware/checkAuth";
-import { getPosts, getPost, addPost, editPost, deletePost, addComment } from "../fake-db";
+import { getPosts, getPost, addPost, editPost, deletePost, addComment, posts } from "../fake-db";
 
 router.get("/", async (req, res) => {
   const posts = getPosts(20);
@@ -73,29 +73,48 @@ router.post("/edit/:postid", ensureAuthenticated, async (req, res) => {
 });
 
 router.get("/deleteconfirm/:postid", ensureAuthenticated, async (req, res) => {
-  // TODO
+  const postId = Number(req.params.postid);
+  const post = posts[postId]  // this gets the post from fake-db.ts using its ID
+
+  if (!post) {
+    return res.status(404).render("error", {
+      message: "Post not found",
+      user: req.user,
+    })
+  }
+
+// getting errors
+/*
+  if (!req.user || post.creator !== req.user.id) {
+    return res.status(403).render("error", {
+      message: "ERROR, only the creator can delete the post ",
+      user: req.user,
+    })
+  }
+*/
+
+
+  // if authernticated, you can move on to confirm deletion 
+  return res.render("deleteConfirm", {post})
 });
 
 //Shrey
 router.post("/delete/:postid", ensureAuthenticated, async (req, res) => {
   const postId = Number(req.params.postid);
-  const post = deletePost(postId);
-    // this is checking if the pose exists(if a post dont exist you cant delete)
-    if (!postId) {
-      return res.status(404).render("error", {
-        message: "Post Not found",
-        user: req.user,
-      });
-    }
-    // this is checking if the person is an actual user(must be a user to delete)
-    if (!req.user) {
-      return res.status(404).render("error", {
-        message: "user Not found(must be logges in to create post",
-        user: req.user,
-      });
-    }
-    
-})
+  const post = posts[postId]  // this gets the post from fake-db.ts using its ID 
+
+  if(!post){
+    return res.status(404).render("error",{
+      message: "Post not found",
+      user: req.user
+    })
+  }
+
+// need to do the 'if user dont own post
+
+deletePost(postId)
+return res.redirect("/post")
+});
 
 router.post("/comment-create/:postid", ensureAuthenticated, async (req, res) => {
   // TODO
