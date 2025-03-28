@@ -79,9 +79,9 @@ router.get("/deleteconfirm/:postid", ensureAuthenticated, async (req, res) => {
 //Shrey
 router.post("/delete/:postid", ensureAuthenticated, async (req, res) => {
   const postId = Number(req.params.postid);
-  const post = getPost(postId);
+  const post = deletePost(postId);
     // this is checking if the pose exists(if a post dont exist you cant delete)
-    if (!post) {
+    if (!postId) {
       return res.status(404).render("error", {
         message: "Post Not found",
         user: req.user,
