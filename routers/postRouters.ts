@@ -84,14 +84,14 @@ router.get("/deleteconfirm/:postid", ensureAuthenticated, async (req, res) => {
   }
 
 // getting errors
-/*
+
   if (!req.user || post.creator !== req.user.id) {
     return res.status(403).render("error", {
       message: "ERROR, only the creator can delete the post ",
       user: req.user,
     })
   }
-*/
+
 
 
   // if authernticated, you can move on to confirm deletion 
