@@ -35,3 +35,13 @@ export type TUsers = {
 };
 
 export type TVotes = { user_id: number; post_id: number; value: number }[];
+
+declare global{
+  namespace Express{
+    interface User{
+      id: number,
+      uname: string,
+      password: string
+    }
+  }
+}

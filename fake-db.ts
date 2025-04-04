@@ -194,4 +194,5 @@ export {
   getSubs,
   addComment,
   decoratePost,
+  posts,
 };
