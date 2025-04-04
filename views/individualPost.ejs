@@ -42,11 +42,9 @@
     <p><a href="/posts">← Back to all posts</a></p>
 
     <!--delete post button -->
-    <% if (user && user.id === post.creatorId) { %>
-      <form action="/posts/confirm-delete/<%= post.id %>" method="GET"> <!-- pressing delete sends you to the confirm delete page -->
-        <button type="submit">Delete Post</button>
-      </form>
-    <% } %>
+    <form action="/posts/deleteconfirm/<%= post.id %>" method="GET">
+      <button type="submit">Delete Post</button>
+    </form> 
 
   </main>
 </body>
