@@ -87,7 +87,7 @@ router.get("/deleteconfirm/:postid", ensureAuthenticated, async (req, res) => {
     })
   }
 
-// getting errors
+// makes sure only creator of the post can delete 
 
   if (!req.user || post.creator !== req.user.id) {
     return res.status(403).render("error", {
@@ -112,6 +112,8 @@ router.post("/delete/:postid", ensureAuthenticated, async (req, res) => {
     });
   }
 
+
+// makes sure only creator of the post can delete 
   if (!req.user || post.creator !== req.user.id) {
     return res.status(403).render("error", {
       message: "You are not authorized to delete this post.",

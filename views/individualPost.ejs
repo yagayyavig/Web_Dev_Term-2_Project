@@ -40,6 +40,12 @@
     <% } %>
 
     <p><a href="/posts">← Back to all posts</a></p>
+
+    <!--delete post button -->
+    <form action="/posts/deleteconfirm/<%= post.id %>" method="GET">
+      <button type="submit">Delete Post</button>
+    </form> 
+
   </main>
 </body>
 </html>
