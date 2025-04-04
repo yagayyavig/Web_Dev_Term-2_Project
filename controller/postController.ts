@@ -1,6 +1,6 @@
 // You don't necessarily need to worry about this file for 
-// postController.ts
 
+// yagayya
 interface Post {
     id: number;
     title: string;
@@ -13,15 +13,6 @@ interface Post {
   
   let posts: Post[] = []; // your in-memory "database"
   
-  export function createPost(postData: Omit<Post, "id" | "timestamp">): Post {
-    const newPost: Post = {
-      ...postData,
-      id: posts.length, // auto-increment ID
-      timestamp: new Date().toLocaleString(),
-    };
-    posts.push(newPost);
-    return newPost;
-  }
   
   export function getPostById(id: number): Post | undefined {
     return posts.find((p) => p.id === id);
