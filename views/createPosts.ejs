@@ -18,6 +18,7 @@
         <a role="button" href="/posts">Home</a>
       </div>
 
+<!--Yagayya-->
       <form action="/posts/create" method="POST">
         <div>
           <label for="title">Title</label>
@@ -30,6 +31,7 @@
             required
           >
         </div>
+<!--Yagayya-->
 
         <div>
           <label for="link">Link</label>
@@ -42,6 +44,7 @@
           >
         </div>
 
+<!--Yagayya-->
         <div>
           <label for="description">Description</label>
           <textarea 
@@ -51,6 +54,8 @@
             required
           ><%= locals.formData && formData.description || '' %></textarea>
         </div>
+
+<!--Yagayya-->
 
         <div>
           <label for="subgroup">Subgroup</label>
@@ -63,6 +68,8 @@
             required
           >
         </div>
+
+<!--Yagayya-->
 
         <!-- Hidden input for creator -->
         <input 
