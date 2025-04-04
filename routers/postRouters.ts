@@ -83,7 +83,7 @@ router.get("/deleteconfirm/:postid", ensureAuthenticated, async (req, res) => {
     })
   }
 
-// getting errors
+// makes sure only creator of the post can delete 
 
   if (!req.user || post.creator !== req.user.id) {
     return res.status(403).render("error", {
@@ -110,7 +110,15 @@ router.post("/delete/:postid", ensureAuthenticated, async (req, res) => {
     })
   }
 
-// need to do the 'if user dont own post
+// makes sure only creator of the post can delete 
+
+if (!req.user || post.creator !== req.user.id) {
+  return res.status(403).render("error", {
+    message: "ERROR, only the creator can delete the post ",
+    user: req.user,
+  })
+}
+
 
 deletePost(postId)
 return res.redirect("/post")
