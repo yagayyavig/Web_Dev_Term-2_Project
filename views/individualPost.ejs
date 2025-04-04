@@ -25,7 +25,6 @@
       <% post.comments.forEach(comment => { %> <!-- use comments with lowers c-->
         <li>
           <p><%= comment.description %></p>
-          <small>By <%= comment.creator %> | <%= comment.timestamp %></small>
         </li>
       <% }) %>
     </ul>

@@ -21,6 +21,11 @@ const users: TUsers = {
     uname: "leerob",
     password: "123",
   },
+  5: {
+    id: 5,
+    uname: "yagayya",
+    password: "yagayya123"
+  }
 };
 
 const posts: TPosts = {
