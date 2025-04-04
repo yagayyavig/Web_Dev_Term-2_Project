@@ -3,6 +3,9 @@ const router = express.Router();
 import { ensureAuthenticated } from "../middleware/checkAuth";
 import { getPosts, getPost, addPost, editPost, deletePost, addComment, posts } from "../fake-db";
 
+
+
+
 router.get("/", async (req, res) => {
   const posts = getPosts(20);
   const user = req.user;
@@ -72,6 +75,7 @@ router.post("/edit/:postid", ensureAuthenticated, async (req, res) => {
   // TODO
 });
 
+// Shrey
 router.get("/deleteconfirm/:postid", ensureAuthenticated, async (req, res) => {
   const postId = Number(req.params.postid);
   const post = posts[postId]  // this gets the post from fake-db.ts using its ID
@@ -92,8 +96,6 @@ router.get("/deleteconfirm/:postid", ensureAuthenticated, async (req, res) => {
     })
   }
 
-
-
   // if authernticated, you can move on to confirm deletion 
   return res.render("deleteConfirm", {post})
 });
@@ -101,23 +103,47 @@ router.get("/deleteconfirm/:postid", ensureAuthenticated, async (req, res) => {
 //Shrey
 router.post("/delete/:postid", ensureAuthenticated, async (req, res) => {
   const postId = Number(req.params.postid);
-  const post = posts[postId]  // this gets the post from fake-db.ts using its ID 
+  const post = posts[postId]; // from fake-db.ts
 
-  if(!post){
-    return res.status(404).render("error",{
+  if (!post) {
+    return res.status(404).render("error", {
       message: "Post not found",
-      user: req.user
-    })
+      user: req.user,
+    });
   }
 
-// need to do the 'if user dont own post
+  if (!req.user || post.creator !== req.user.id) {
+    return res.status(403).render("error", {
+      message: "You are not authorized to delete this post.",
+      user: req.user,
+    });
+  }
 
-deletePost(postId)
-return res.redirect("/post")
+  deletePost(postId);
+  return res.redirect("/posts");
 });
 
-router.post("/comment-create/:postid", ensureAuthenticated, async (req, res) => {
-  // TODO
+  
+
+// Yagayya
+router.post("/comment-create/:postid", ensureAuthenticated, (req, res) => {
+  const postId = parseInt(req.params.postid);
+  const post = getPost(postId);
+
+  if (!post) {
+    return res.status(404).render("error", {
+      message: "Post not found",
+      user: req.user
+    });
+  }
+
+  addComment(
+    postId,
+    (req.user as any).id,
+    req.body.description
+  );
+
+  res.redirect(`/posts/show/${postId}`);
 });
 
 export default router;

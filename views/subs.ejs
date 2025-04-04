@@ -9,17 +9,69 @@
       href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css"
     />
     <link href="/css/style.css" rel="stylesheet" />
-    <title>Subs</title>
+    <title>Subgroups</title>
   </head>
   <body>
     <main>
+      <nav>
+        <ul>
+          <li><strong>PostIt</strong></li>
+        </ul>
+        <ul>
+          <% if (user) { %>
+            <li>Welcome, <%= user.username %></li>
+            <li><a href="/auth/logout">Logout</a></li>
+          <% } else { %>
+            <li><a href="/auth/login">Login</a></li>
+            <li><a href="/auth/register">Register</a></li>
+          <% } %>
+          
+        </ul>
+      </nav>
+      
       <div class="authOptions">
-        <h1>Sub Groups</h1>
+        <h1>Subgroups</h1>
         <a role="button" href="/posts">Home</a>
       </div>
-      <div>
-        <p>Implement this page yourself. It is from subs.ejs</p>
-      </div>
+      
+      <% if (subgroups && subgroups.length > 0) { %>
+        <article>
+          <h2>Available Subgroups</h2>
+          <div class="subgroups-container">
+            <% subgroups.forEach(sub => { %>
+              <div class="subgroup-card">
+                <h3><a href="/subs/show/<%= sub.name %>"><%= sub.name %></a></h3>
+                <p><%= sub.postCount %> posts</p>
+              </div>
+            <% }); %>
+          </div>
+        </article>
+      <% } else { %>
+        <article>
+          <p>No subgroups available yet. Be the first to create a post with a new subgroup!</p>
+          <a role="button" href="/posts/create">Create Post</a>
+        </article>
+      <% } %>
     </main>
+    
+    <style>
+      .subgroups-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+      
+      .subgroup-card {
+        padding: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        transition: all 0.2s;
+      }
+      
+      .subgroup-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      }
+    </style>
   </body>
 </html>

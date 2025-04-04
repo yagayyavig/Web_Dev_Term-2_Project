@@ -5,36 +5,49 @@ import {
   getUserById,
 } from "../controller/userController";
 
+// Yagayya 
+interface User {
+  id: number;
+  uname: string;
+  password: string;
+}
 
-// ⭐ TODO for Students: Fix Passport Types so they don't say any
+// Local strategy login
 const localLogin = new LocalStrategy(
   {
     usernameField: "uname",
     passwordField: "password",
   },
-  async (uname: any, password: any, done: any) => {
-    // ⭐ TODO for Students: Show the login error message on the login page
-    const user = await getUserByEmailIdAndPassword(uname, password);
-    return user
-      ? done(null, user)
-      : done(null, false, {
+  async (uname: string, password: string, done) => {
+    try {
+      const user = await getUserByEmailIdAndPassword(uname, password);
+      if (!user) {
+        return done(null, false, {
           message: "Your login details are not valid. Please try again.",
         });
+      }
+      return done(null, user);
+    } catch (err) {
+      return done(err);
+    }
   }
 );
 
-// ⭐ TODO for Students: Fix Passport Types so they don't say any
-passport.serializeUser(function (user: any, done: any) {
+// Serialize user for the session
+passport.serializeUser<number>((user: User, done) => {
   done(null, user.id);
 });
 
-// ⭐ TODO for Students: Fix Passport Types so they don't say any
-passport.deserializeUser(function (id: any, done: any) {
-  const user = getUserById(id);
-  if (user) {
-    done(null, user);
-  } else {
-    done({ message: "User not found" }, null);
+// Deserialize user from the session
+passport.deserializeUser<number>(async (id: number, done) => {
+  try {
+    const user = await getUserById(id);
+    if (!user) {
+      return done({ message: "User not found" }, null);
+    }
+    return done(null, user);
+  } catch (err) {
+    return done(err, null);
   }
 });
 

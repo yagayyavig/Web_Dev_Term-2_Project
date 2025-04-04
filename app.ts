@@ -23,7 +23,7 @@ app.use(
 
 import indexRoute from "./routers/indexRoute";
 import authRoute from "./routers/authRoute";
-import postsRoute from "./routers/postRouters";
+import postsRouters from "./routers/postRouters";
 import subsRouters from "./routers/subsRouters";
 
 app.use(express.json());
@@ -32,7 +32,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/auth", authRoute);
-app.use("/posts", postsRoute);
+app.use("/posts", postsRouters);
 app.use("/subs", subsRouters);
 app.use("/", indexRoute);
 
