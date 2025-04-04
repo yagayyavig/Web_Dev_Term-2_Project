@@ -1,16 +1,20 @@
-const { ensureAuthenticated } = require("../middleware/checkAuth");
 import express from "express";
-import * as database from "../controller/postController";
+import { getSubs, getPosts } from "../fake-db";
+import { Request, Response } from "express";
+
 const router = express.Router();
 
-router.get("/list", async (req, res) => {
-  const subgroups = database.getAllSubgroups();
+// GET /subs/list
+router.get("/list", (req: Request, res: Response) => {
+  const subgroups = getSubs(); // returns array of subgroup strings
   res.render("subs", { subgroups, user: req.user });
 });
 
-router.get("/show/:subname", async (req, res) => {
-  const posts = database.getPostsBySubgroup(req.params.subname);
-  res.render("sub", { posts, subgroupName: req.params.subname, user: req.user });
+// GET /subs/show/:subname
+router.get("/show/:subname", (req: Request, res: Response) => {
+  const subname = req.params.subname;
+  const posts = getPosts(20); // gets top 20 posts in this subgroup
+  res.render("sub", { subname, posts, user: req.user });
 });
 
 export default router;
