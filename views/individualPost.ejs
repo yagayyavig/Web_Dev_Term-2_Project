@@ -38,12 +38,15 @@
       <p><a href="/login">Login</a> to comment</p>
     <% } %>
 
-    <p><a href="/posts">← Back to all posts</a></p>
-
+    <form action="/posts/edit/<%= post.id %>" method="GET">
+      <button type="submit">Edit Post</button>
+    </form>
     <!--delete post button -->
     <form action="/posts/deleteconfirm/<%= post.id %>" method="GET">
       <button type="submit">Delete Post</button>
     </form> 
+
+      <p><a href="/posts">← Back to all posts</a></p>
 
   </main>
 </body>

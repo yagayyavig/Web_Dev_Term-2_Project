@@ -143,14 +143,12 @@ function addPost(
 }
 
 function editPost(
-  post_id: number,
-  changes: {
-    title?: string;
-    link?: string;
-    description?: string;
-    subgroup?: string;
-  } = {}
-) {
+post_id: number, changes: {
+  title?: string;
+  link?: string;
+  description?: string;
+  subgroup?: string;
+} = {}, link: any, description: any, subgroup: any) {
   let post = posts[post_id];
   if (changes.title) {
     post.title = changes.title;
