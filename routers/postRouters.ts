@@ -67,13 +67,67 @@ router.get("/show/:postid", async (req, res) => {
   }
 });
 
+// Martin
 router.get("/edit/:postid", ensureAuthenticated, async (req, res) => {
- 
+  const postId = Number(req.params.postid);
+  const post = getPost(postId);
+
+  if (!post) {
+    return res.status(404).render("error", {
+      message: "Post not found",
+      user: req.user,
+    });
+  }
+
+  if (!req.user || post.creator.id !== req.user.id) {
+    return res.status(403).render("error", {
+      message: "Only the creator can edit this post",
+      user: req.user,
+    });
+  }
+
+  res.render("editPost", {
+    post,
+    user: req.user,
+    formData: {} // prevents ReferenceError in EJS when accessing formData
+  });
 });
 
+// Martin
 router.post("/edit/:postid", ensureAuthenticated, async (req, res) => {
-  
+  const postId = Number(req.params.postid);
+  const post = getPost(postId);
+
+  if (!post) {
+    return res.status(404).render("error", {
+      message: "Post not found",
+      user: req.user,
+    });
+  }
+
+  if (!req.user || post.creator.id !== req.user.id) {
+    return res.status(403).render("error", {
+      message: "Only the creator can edit this post",
+      user: req.user,
+    });
+  }
+
+  const { title, link, description, subgroup } = req.body;
+
+  // check for missing fields
+  if (!title || !link || !description || !subgroup) {
+    return res.render("editPost", {
+      post: { ...post, title, link, description, subgroup },
+      error: "All fields are required",
+      user: req.user,
+    });
+  }
+
+  editPost(postId, { title, link, description, subgroup });
+
+  res.redirect(`/posts/show/${postId}`);
 });
+
 // Shrey
 router.get("/deleteconfirm/:postid", ensureAuthenticated, async (req, res) => {
   const postId = Number(req.params.postid);

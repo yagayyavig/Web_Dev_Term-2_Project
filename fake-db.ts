@@ -143,25 +143,22 @@ function addPost(
 }
 
 function editPost(
-post_id: number, changes: {
-  title?: string;
-  link?: string;
-  description?: string;
-  subgroup?: string;
-} = {}, link: any, description: any, subgroup: any) {
+  post_id: number,
+  changes: {
+    title?: string;
+    link?: string;
+    description?: string;
+    subgroup?: string;
+  } = {}
+) {
   let post = posts[post_id];
-  if (changes.title) {
-    post.title = changes.title;
-  }
-  if (changes.link) {
-    post.link = changes.link;
-  }
-  if (changes.description) {
-    post.description = changes.description;
-  }
-  if (changes.subgroup) {
-    post.subgroup = changes.subgroup;
-  }
+  if (!post) return;
+
+  // update only the fields changed
+  if (changes.title) post.title = changes.title;
+  if (changes.link) post.link = changes.link;
+  if (changes.description) post.description = changes.description;
+  if (changes.subgroup) post.subgroup = changes.subgroup;
 }
 
 function deletePost(post_id: number) {
