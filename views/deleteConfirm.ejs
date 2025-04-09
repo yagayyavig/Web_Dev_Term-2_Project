@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirm Delete </title>
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.classless.min.css" />
+        <link href="/css/style.css" rel="stylesheet" />
+        <title>Confirm Delete </title>
+    </head>
 <body>
     <h1>Are you sure you want to delete this post?</h1>
 
@@ -16,11 +18,11 @@
         
     </div>
 
-    <form action="/posts/delete/<%= post.id %>" method="POST">
+    <form action="/posts/delete/<%= post.id %>" method="POST"> <!-- changed from deleteConfirm to delete-->
         <button type="submit">Confirm</button>
     </form>
-    
-    <a href="/posts">Cancel</a>
+    <br>
+    <a href="/posts">Cancel</a> <!--if user dont want to delete it sends them back to the post page-->
 
 
 </body>
