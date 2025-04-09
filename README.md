@@ -13,7 +13,9 @@ Yagayya Vig:
 
 4. <subs groups> - This task is responsible for creating subgroups and showing them 
 
-5. <comments> - This task is responsible for creating comments on posts and showing them on the posts
+5. <subs.ejs and sub.ejs> - This task is responsible for getting sub group and converting it ejs 
+
+6. <comments> - This task is responsible for creating comments on posts and showing them on the posts
 
 
 Shrey Dhand
